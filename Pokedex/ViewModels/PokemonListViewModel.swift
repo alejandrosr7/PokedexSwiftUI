@@ -9,28 +9,18 @@ import Foundation
 
 class PokemonListViewModel: ObservableObject {
     @Published var pokemonResults = [PokemonListResult]()
+    @Published var nextSearch = ""
+    @Published var previousSearch = ""
 
     init() {
-        fetchPokemonList()
+        fetchPokemonList(urlString: Constants.pokemonListbaseURL)
     }
 
-    func fetchPokemonList() {
-        guard let url = URL(string: Constants.pokemonListbaseURL) else { return }
-        
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard let data = data else { return }
-            
-            do {
-                let decoder = try JSONDecoder().decode(PokemonListModel.self, from: data)
-                DispatchQueue.main.async {
-                    self.pokemonResults = decoder.results
-                    
-                    print(decoder.results[0].name)
-                }
-            } catch {
-                
-            }
+    func fetchPokemonList(urlString: String) {
+        WebService().fetchPokemon(urlString) { (decoder) in
+            self.pokemonResults = decoder.results
+            self.nextSearch = decoder.next
+            self.previousSearch = decoder.previous ?? ""
         }
-        task.resume()
     }
 }

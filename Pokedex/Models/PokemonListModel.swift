@@ -9,6 +9,7 @@ import Foundation
 
 struct PokemonListModel: Codable {
     let next: String
+    let previous: String?
     let results: [PokemonListResult]
 }
 
