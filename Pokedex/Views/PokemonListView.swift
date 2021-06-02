@@ -13,9 +13,13 @@ struct PokemonListView: View {
         NavigationView {
             List {
                 ForEach(pokemonListViewModel.pokemonResults, id: \.self) { pokemon in
-                    Text(pokemon.name)
+                    NavigationLink(destination: PokemonDetailView()) {
+                        Text(pokemon.name)
+                        
+                    }
                 }
             }
+            .navigationTitle("Pokedex")
             .navigationBarItems(leading: Button("Previous"){
                 pokemonListViewModel.fetchPokemonList(urlString: pokemonListViewModel.previousSearch)
             }, trailing: Button("Next"){

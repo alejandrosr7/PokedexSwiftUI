@@ -8,10 +8,10 @@
 import Foundation
 
 class WebService {
-    func fetchPokemon(_ url: String, completion: @escaping (PokemonListModel) -> ()) {
+    func fetchPokemonList(_ url: String, completion: @escaping (PokemonListModel) -> ()) {
         guard let url = URL(string: url) else { return }
         
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data else { return }
             
             do {
@@ -22,7 +22,21 @@ class WebService {
             } catch {
                 
             }
+        }.resume()
+    }
+
+    func fetchPokemon(_ url: String, completion: @escaping (PokemonModel) -> ()) {
+        guard let url = URL(string: url) else { return }
+
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data else { return }
+            
+            do {
+                let decoder = try? JSONDecoder().decode(PokemonModel.self, from: data)
+                DispatchQueue.main.async {
+                    completion(decoder!)
+                }
+            }
         }
-        task.resume()
     }
 }

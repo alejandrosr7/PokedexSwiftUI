@@ -17,7 +17,7 @@ class PokemonListViewModel: ObservableObject {
     }
 
     func fetchPokemonList(urlString: String) {
-        WebService().fetchPokemon(urlString) { (decoder) in
+        WebService().fetchPokemonList(urlString) { (decoder) in
             self.pokemonResults = decoder.results
             self.nextSearch = decoder.next
             self.previousSearch = decoder.previous ?? ""

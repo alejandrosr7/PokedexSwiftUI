@@ -9,4 +9,5 @@ import Foundation
 
 struct Constants {
     static var pokemonListbaseURL: String = "https://pokeapi.co/api/v2/pokemon?limit=50&offset=0"
+    static var pokemonURL: String = "https://pokeapi.co/api/v2/pokemon"
 }
