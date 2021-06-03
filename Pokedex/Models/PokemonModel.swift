@@ -8,48 +8,47 @@
 import Foundation
 
 struct PokemonModel: Codable {
-    var id: Int
     var name: String
-    var weight: Int
-    var height: Int
-    var types: [Types]
-    var moves: [Moves]
-    var abilities: [Abilities]
     var sprites: Sprites
 }
 
-struct Type: Codable {
+struct Type: Codable, Hashable {
     var name: String
 }
 
-struct Types: Codable {
+struct Types: Codable, Hashable {
     var type: Type
 }
 
-struct Move: Codable {
+struct Move: Codable, Hashable {
     var name: String
 }
 
-struct Moves: Codable {
+struct Moves: Codable, Hashable {
     var move: Move
 }
 
-struct Ability: Codable {
+struct Ability: Codable, Hashable {
     var name: String
 }
 
-struct Abilities: Codable {
+struct Abilities: Codable, Hashable {
     var ability: Ability
 }
 
 struct Sprites: Codable {
     var front_default: String
+    var other: Other
 }
 
-struct Other {
+struct Other: Codable {
     var officialArtwork: OfficialArtwork
+    
+    enum CodingKeys: String, CodingKey {
+        case officialArtwork = "official-artwork"
+    }
 }
 
-struct OfficialArtwork {
+struct OfficialArtwork: Codable {
     var front_default: String
 }

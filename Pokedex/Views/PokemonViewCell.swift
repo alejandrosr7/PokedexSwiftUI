@@ -6,26 +6,27 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct PokemonViewCell: View {
 
-    @StateObject var pokemonViewModel = PokemonViewModel()
     var name = ""
     var pokedexNumber = ""
-    
-
+    @StateObject var pokemonViewModel = PokemonViewModel()
     var body: some View {
         HStack {
-            Image("")
-                .resizable()
-                .frame(width: 50, height: 50, alignment: .center)
+            WebImage(url: URL(string: pokemonViewModel.sprites)).resizable()
+                .frame(width: 100, height: 100, alignment: .center)
                 .padding()
-            Text(pokemonViewModel.name)
+            Text(pokemonViewModel.name.capitalized)
                 .foregroundColor(.black)
-            Text("\(pokemonViewModel.pokedexNumber)")
-                .foregroundColor(.black)
+                .padding()
         }
-        .frame(width: 300, height: 100, alignment: .center)
+        .progressViewStyle(CircularProgressViewStyle())
+        .onAppear {
+            pokemonViewModel.fetchPokemon(with: name)
+        }
+        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
     }
 }
 

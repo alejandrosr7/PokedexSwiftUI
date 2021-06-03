@@ -13,9 +13,8 @@ struct PokemonListView: View {
         NavigationView {
             List {
                 ForEach(pokemonListViewModel.pokemonResults, id: \.self) { pokemon in
-                    NavigationLink(destination: PokemonDetailView()) {
-                        Text(pokemon.name)
-                        
+                    NavigationLink(destination: PokemonDetailView(name: pokemon.name)) {
+                        PokemonViewCell(name: pokemon.name)
                     }
                 }
             }

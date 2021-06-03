@@ -6,15 +6,58 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct PokemonDetailView: View {
+    var name = ""
+    @ObservedObject var pokemonDetailViewModel = PokemonDetailViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            HStack {
+                Text(pokemonDetailViewModel.name)
+                Text(String(pokemonDetailViewModel.pokedexNumber))
+            }
+            VStack {
+                WebImage(url: URL(string: pokemonDetailViewModel.officialArtwork))
+                    .resizable()
+                    .frame(width: 200, height: 200, alignment: .center)
+                    .padding()
+                HStack {
+                    Text("Heigth: " + pokemonDetailViewModel.height)
+                    Text("Weigth: " + pokemonDetailViewModel.weight)
+                }
+            }
+            HStack {
+                ForEach(pokemonDetailViewModel.types, id: \.self) { pokemon in
+                    Text(pokemon.type.name)
+                }
+            }
+            Divider()
+            HStack {
+                VStack {
+                    Text("Movements")
+                    ForEach(pokemonDetailViewModel.moves.prefix(5), id: \.self) { pokemon in
+                        Text(pokemon.move.name)
+                    }
+                }
+                Divider()
+                VStack {
+                    Text("Abilities")
+                    ForEach(pokemonDetailViewModel.abilities, id: \.self) { pokemon in
+                        Text(pokemon.ability.name)
+                    }
+                }
+            }
+            .onAppear {
+                pokemonDetailViewModel.fetchPokemonDetail(with: name)
+            }
+        }
     }
 }
 
 struct PokemonDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        PokemonDetailView()
+        PokemonDetailView(name: "Bulbasaur")
     }
 }

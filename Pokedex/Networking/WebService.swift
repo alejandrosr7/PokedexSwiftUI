@@ -37,6 +37,21 @@ class WebService {
                     completion(decoder!)
                 }
             }
-        }
+        }.resume()
+    }
+
+    func fetchPokemonDetail(_ url: String, completion: @escaping (PokemonDetailModel) -> ()) {
+        guard let url = URL(string: url) else { return }
+
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data else { return }
+            
+            do {
+                let decoder = try? JSONDecoder().decode(PokemonDetailModel.self, from: data)
+                DispatchQueue.main.async {
+                    completion(decoder!)
+                }
+            }
+        }.resume()
     }
 }
