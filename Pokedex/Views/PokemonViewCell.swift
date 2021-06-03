@@ -11,27 +11,46 @@ import SDWebImageSwiftUI
 struct PokemonViewCell: View {
 
     var name = ""
-    var pokedexNumber = ""
     @StateObject var pokemonViewModel = PokemonViewModel()
     var body: some View {
         HStack {
-            WebImage(url: URL(string: pokemonViewModel.sprites)).resizable()
+            WebImage(url: URL(string: pokemonViewModel.sprites))
+                .resizable()
+                .scaledToFit()
                 .frame(width: 100, height: 100, alignment: .center)
-                .padding()
             Text(pokemonViewModel.name.capitalized)
+                .font(.headline)
                 .foregroundColor(.black)
-                .padding()
+                .padding(.horizontal, 16)
+                .padding(.vertical, 14)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20)
+                        .fill(Color.white.opacity(0.25))
+                )
+            Spacer()
+            VStack {
+                ForEach(pokemonViewModel.types, id: \.self) { pokemonType in
+                    Circle()
+                        .fill(Color(Constants.backgroundColor(forType: pokemonType.type.name)))
+                        .frame(width: 30, height: 30)
+                        .shadow(color: .gray, radius: 6, x: 0.0, y: 0.0)
+                }
+            }
+            .padding(.trailing, 10)
         }
         .progressViewStyle(CircularProgressViewStyle())
         .onAppear {
             pokemonViewModel.fetchPokemon(with: name)
         }
-        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
+        .background(Color.white)
+        .cornerRadius(12)
+        .shadow(color: .gray, radius: 6, x: 0.0, y: 0.0)
+        .padding(.horizontal)
     }
 }
 
 struct PokemonViewCell_Previews: PreviewProvider {
     static var previews: some View {
-        PokemonViewCell(name: "Bulbasaur", pokedexNumber: "1")
+        PokemonViewCell(name: "Bulbasaur")
     }
 }

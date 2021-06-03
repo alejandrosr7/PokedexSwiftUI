@@ -10,6 +10,7 @@ import Foundation
 struct PokemonModel: Codable {
     var name: String
     var sprites: Sprites
+    var types: [Types]
 }
 
 struct Type: Codable, Hashable {

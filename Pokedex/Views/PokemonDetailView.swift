@@ -15,12 +15,14 @@ struct PokemonDetailView: View {
     var body: some View {
         VStack {
             HStack {
-                Text(pokemonDetailViewModel.name)
                 Text(String(pokemonDetailViewModel.pokedexNumber))
             }
             VStack {
                 WebImage(url: URL(string: pokemonDetailViewModel.officialArtwork))
                     .resizable()
+                    .clipShape(Circle())
+                    .background(Circle()
+                                    .foregroundColor(Color(Constants.backgroundColor(forType: pokemonDetailViewModel.types.first?.type.name ?? "none"))))
                     .frame(width: 200, height: 200, alignment: .center)
                     .padding()
                 HStack {
@@ -34,7 +36,7 @@ struct PokemonDetailView: View {
                 }
             }
             Divider()
-            HStack {
+            HStack(alignment: .center) {
                 VStack {
                     Text("Movements")
                     ForEach(pokemonDetailViewModel.moves.prefix(5), id: \.self) { pokemon in

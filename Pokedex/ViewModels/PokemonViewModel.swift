@@ -11,11 +11,15 @@ class PokemonViewModel: ObservableObject {
 
     @Published var name = ""
     @Published var sprites = ""
+    @Published var types = [Types]()
 
     func fetchPokemon(with name: String) {
         WebService().fetchPokemon(Constants.pokemonURL+name) { (pokemon) in
-            self.name = pokemon.name
-            self.sprites = pokemon.sprites.front_default
+            if let pokemon = pokemon {
+                self.name = pokemon.name
+                self.sprites = pokemon.sprites.front_default
+                self.types = pokemon.types
+            }
         }
     }
 }

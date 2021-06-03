@@ -25,6 +25,7 @@
 		0B77DBC52667353C00F0A29D /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 0B77DBC42667353C00F0A29D /* SDWebImageSwiftUI */; };
 		0B77DBCA26674ACF00F0A29D /* PokemonDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B77DBC926674ACE00F0A29D /* PokemonDetailModel.swift */; };
 		0B77DBCF26674AED00F0A29D /* PokemonDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B77DBCE26674AED00F0A29D /* PokemonDetailViewModel.swift */; };
+		0B77DBEA266934EF00F0A29D /* MasterBallLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B77DBE9266934EE00F0A29D /* MasterBallLoaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		0B77DBBE2666F86D00F0A29D /* PokemonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonViewModel.swift; sourceTree = "<group>"; };
 		0B77DBC926674ACE00F0A29D /* PokemonDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailModel.swift; sourceTree = "<group>"; };
 		0B77DBCE26674AED00F0A29D /* PokemonDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailViewModel.swift; sourceTree = "<group>"; };
+		0B77DBE9266934EE00F0A29D /* MasterBallLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterBallLoaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +167,7 @@
 				0B77DB5C2665C54C00F0A29D /* PokemonListView.swift */,
 				0B77DB612665DF7B00F0A29D /* PokemonViewCell.swift */,
 				0B77DB6F26660A0200F0A29D /* PokemonDetailView.swift */,
+				0B77DBE9266934EE00F0A29D /* MasterBallLoaderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 			files = (
 				0B77DB062665A90C00F0A29D /* ContentView.swift in Sources */,
 				0B77DB042665A90C00F0A29D /* PokedexApp.swift in Sources */,
+				0B77DBEA266934EF00F0A29D /* MasterBallLoaderView.swift in Sources */,
 				0B77DB7026660A0200F0A29D /* PokemonDetailView.swift in Sources */,
 				0B77DBBA2666E8C700F0A29D /* PokemonModel.swift in Sources */,
 				0B77DB6B2665F75900F0A29D /* WebService.swift in Sources */,

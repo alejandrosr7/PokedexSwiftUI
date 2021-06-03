@@ -21,15 +21,17 @@ class PokemonDetailViewModel: ObservableObject {
     
     func fetchPokemonDetail(with name: String) {
         WebService().fetchPokemonDetail(Constants.pokemonURL+name) { (pokemon) in
-            self.pokedexNumber = String(pokemon.id)
-            self.name = pokemon.name
-            self.weight = String(pokemon.weight)
-            self.height = String(pokemon.height)
-            self.sprites = pokemon.sprites.front_default
-            self.officialArtwork = pokemon.sprites.other.officialArtwork.front_default
-            self.types = pokemon.types
-            self.moves = pokemon.moves
-            self.abilities = pokemon.abilities
+            if let pokemon = pokemon {
+                self.pokedexNumber = String(pokemon.id)
+                self.name = pokemon.name
+                self.weight = String(pokemon.weight)
+                self.height = String(pokemon.height)
+                self.sprites = pokemon.sprites.front_default
+                self.officialArtwork = pokemon.sprites.other.officialArtwork.front_default
+                self.types = pokemon.types
+                self.moves = pokemon.moves
+                self.abilities = pokemon.abilities
+            }
         }
     }
 }
