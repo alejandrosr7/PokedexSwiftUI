@@ -16,20 +16,37 @@ struct PokemonVoteView: View {
     var degree: Double = 0.0
 
     var body: some View {
-        VStack {
-            ZStack {
-                ForEach(pokemonVoteViewModel.pokemonCards) { item in
-                    pokemonCard(pokemon: item)
-                        .padding(8)
+        ZStack {
+            Color.black.edgesIgnoringSafeArea(.all)
+            VStack {
+                ZStack {
+                    ForEach(pokemonVoteViewModel.pokemonCards) { item in
+                        pokemonCard(pokemon: item)
+                            .padding(8)
+                    }
                 }
-            }
-            HStack(spacing: 10) {
-                Button(action: {}, label: {
-                    Text("Button")
-                })
-                Button(action: {}, label: {
-                    Text("Button")
-                })
+                HStack(spacing: 10) {
+                    Button(action: {
+                        
+                    }, label: {
+                        HStack {
+                            Image("dislike")
+                                .resizable()
+                                .frame(width: 100, height: 100, alignment: .center)
+                                .padding([.leading, .bottom], 40)
+                        }
+                    })
+                    Spacer()
+                    Button(action: {
+                        
+                    }, label: {
+                        Image("like")
+                            .resizable()
+                            .frame(width: 100, height: 100, alignment: .leading)
+                            .padding([.trailing, .bottom], 40)
+                    })
+                    
+                }
             }
         }
     }
@@ -49,27 +66,31 @@ struct pokemonCard: View {
 
     var body: some View {
         ZStack(alignment: .leading) {
-            Rectangle()
-            WebImage(url: URL(string: pokemon.sprites.other.officialArtwork.front_default))
-                .resizable()
-            VStack(alignment: .leading) {
-                Spacer()
-                HStack {
-                    Text(pokemon.name)
-                        .font(.largeTitle)
-                        .fontWeight(.bold)
-                    Text("#" + String(pokemon.id))
-                        .font(.title)
-                }
-                HStack {
-                    ForEach(pokemon.types, id: \.self) { type in
-                        Text(type.type.name)
-                            .foregroundColor(.black)
+            Rectangle().foregroundColor(Color(Constants.backgroundColor(forType: pokemon.types.first?.type.name ?? "none")))
+            VStack {
+                WebImage(url: URL(string: pokemon.sprites.other.officialArtwork.front_default))
+                    .resizable()
+                VStack(alignment: .center) {
+                    HStack {
+                        Text(pokemon.name.capitalized)
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                        Text("#" + String(pokemon.id))
+                            .font(.title)
+                    }
+                    HStack(alignment: .center) {
+                        ForEach(pokemon.types, id: \.self) { type in
+                            Spacer()
+                            Text(type.type.name.capitalized)
+                                .foregroundColor(.white)
+                            Spacer()
+                        }
                     }
                 }
+                .padding()
+                .foregroundColor(.white)
             }
-            .padding()
-            .foregroundColor(.white)
+            
         }
         .cornerRadius(8)
         .offset(x: x, y: y)

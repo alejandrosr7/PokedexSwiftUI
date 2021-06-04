@@ -8,27 +8,30 @@
 import SwiftUI
 
 struct PokemonListView: View {
-
+    
     @StateObject var pokemonListViewModel = PokemonListViewModel()
     var body: some View {
-        if pokemonListViewModel.pokemonResults.count > 40 {
-            NavigationView {
-                ScrollView {
-                    ForEach(pokemonListViewModel.pokemonResults, id: \.self) { pokemon in
-                        NavigationLink(destination: PokemonDetailView(name: pokemon.name)) {
-                            PokemonViewCell(name: pokemon.name)
+        ZStack {
+            Color.black.edgesIgnoringSafeArea(.all)
+            if pokemonListViewModel.pokemonResults.count > 40 {
+                NavigationView {
+                    ScrollView {
+                        ForEach(pokemonListViewModel.pokemonResults, id: \.self) { pokemon in
+                            NavigationLink(destination: PokemonDetailView(name: pokemon.name)) {
+                                PokemonViewCell(name: pokemon.name)
+                            }
                         }
                     }
+                    .navigationTitle("Pokedex")
+                    .navigationBarItems(leading: Button("Previous"){
+                        pokemonListViewModel.fetchPokemonList(urlString: pokemonListViewModel.previousSearch)
+                    }, trailing: Button("Next"){
+                        pokemonListViewModel.fetchPokemonList(urlString: pokemonListViewModel.nextSearch)
+                    })
                 }
-                .navigationTitle("Pokedex")
-                .navigationBarItems(leading: Button("Previous"){
-                    pokemonListViewModel.fetchPokemonList(urlString: pokemonListViewModel.previousSearch)
-                }, trailing: Button("Next"){
-                    pokemonListViewModel.fetchPokemonList(urlString: pokemonListViewModel.nextSearch)
-                })
+            } else {
+                MasterBallLoaderView()
             }
-        } else {
-            MasterBallLoaderView()
         }
     }
 }
