@@ -21,8 +21,8 @@ struct PokemonViewCell: View {
             Text(pokemonViewModel.name.capitalized)
                 .font(.headline)
                 .foregroundColor(.black)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 14)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 10)
                 .overlay(
                     RoundedRectangle(cornerRadius: 20)
                         .fill(Color.white.opacity(0.25))
@@ -42,15 +42,24 @@ struct PokemonViewCell: View {
         .onAppear {
             pokemonViewModel.fetchPokemon(with: name)
         }
-        .background(Color.white)
+//        .background(Color(Constants.backgroundColor(forType: pokemonViewModel.types.first?.type.name ?? "none")))
+        .background(LinearGradient(gradient: Gradient(colors: colorCell(types: pokemonViewModel.types)), startPoint: /*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/, endPoint: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/))
         .cornerRadius(12)
         .shadow(color: .gray, radius: 6, x: 0.0, y: 0.0)
         .padding(.horizontal)
+    }
+    
+    private func colorCell(types: [Types]) -> [Color] {
+        var colors = [Color]()
+        for type in types {
+            colors.append(Color(Constants.backgroundColor(forType: type.type.name)))
+        }
+        return colors
     }
 }
 
 struct PokemonViewCell_Previews: PreviewProvider {
     static var previews: some View {
-        PokemonViewCell(name: "Bulbasaur")
+        PokemonViewCell(name: "Bulbasaur").previewLayout(.sizeThatFits)
     }
 }

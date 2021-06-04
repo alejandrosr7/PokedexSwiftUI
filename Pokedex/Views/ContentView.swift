@@ -12,7 +12,11 @@ struct ContentView: View {
         TabView {
             PokemonListView()
                 .tabItem {
-                    Label("Pokemons", systemImage: "list.dash")
+                    Label("Pokedex", systemImage: "list.dash")
+                }
+            PokemonVoteView()
+                .tabItem {
+                    Label("Vote", systemImage: "list.dash")
                 }
         }
     }

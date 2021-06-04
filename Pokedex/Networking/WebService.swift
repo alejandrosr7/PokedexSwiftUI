@@ -56,4 +56,20 @@ class WebService {
             }
         }.resume()
     }
+
+    func fetchPokemonVoteDetail(_ url: String, completion: @escaping (PokemonVoteModel?) -> ()) {
+        guard let url = URL(string: url) else { return }
+
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data else {
+                completion(nil)
+                return
+            }
+
+            let decoder = try? JSONDecoder().decode(PokemonVoteModel.self, from: data)
+            DispatchQueue.main.async {
+                completion(decoder)
+            }
+        }.resume()
+    }
 }

@@ -26,6 +26,12 @@
 		0B77DBCA26674ACF00F0A29D /* PokemonDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B77DBC926674ACE00F0A29D /* PokemonDetailModel.swift */; };
 		0B77DBCF26674AED00F0A29D /* PokemonDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B77DBCE26674AED00F0A29D /* PokemonDetailViewModel.swift */; };
 		0B77DBEA266934EF00F0A29D /* MasterBallLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B77DBE9266934EE00F0A29D /* MasterBallLoaderView.swift */; };
+		0B77DBF026693E4500F0A29D /* PokemonInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B77DBEF26693E4400F0A29D /* PokemonInfoView.swift */; };
+		0B77DBF82669496500F0A29D /* StateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B77DBF72669496400F0A29D /* StateButton.swift */; };
+		0B77DBFD26695D6100F0A29D /* PokemonInfoDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B77DBFC26695D6100F0A29D /* PokemonInfoDetailView.swift */; };
+		0B77DC022669744700F0A29D /* PokemonVoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B77DC012669744600F0A29D /* PokemonVoteView.swift */; };
+		0B77DC0A26698D8F00F0A29D /* PokemonVoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B77DC0926698D8F00F0A29D /* PokemonVoteViewModel.swift */; };
+		0B77DC0F2669998F00F0A29D /* PokemonVoteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B77DC0E2669998F00F0A29D /* PokemonVoteModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +76,12 @@
 		0B77DBC926674ACE00F0A29D /* PokemonDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailModel.swift; sourceTree = "<group>"; };
 		0B77DBCE26674AED00F0A29D /* PokemonDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailViewModel.swift; sourceTree = "<group>"; };
 		0B77DBE9266934EE00F0A29D /* MasterBallLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterBallLoaderView.swift; sourceTree = "<group>"; };
+		0B77DBEF26693E4400F0A29D /* PokemonInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonInfoView.swift; sourceTree = "<group>"; };
+		0B77DBF72669496400F0A29D /* StateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateButton.swift; sourceTree = "<group>"; };
+		0B77DBFC26695D6100F0A29D /* PokemonInfoDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonInfoDetailView.swift; sourceTree = "<group>"; };
+		0B77DC012669744600F0A29D /* PokemonVoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonVoteView.swift; sourceTree = "<group>"; };
+		0B77DC0926698D8F00F0A29D /* PokemonVoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonVoteViewModel.swift; sourceTree = "<group>"; };
+		0B77DC0E2669998F00F0A29D /* PokemonVoteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonVoteModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,12 +174,14 @@
 		0B77DB322665B1A900F0A29D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0B77DBEE26693E1D00F0A29D /* Custom */,
 				0B77DB032665A90C00F0A29D /* PokedexApp.swift */,
 				0B77DB052665A90C00F0A29D /* ContentView.swift */,
 				0B77DB5C2665C54C00F0A29D /* PokemonListView.swift */,
 				0B77DB612665DF7B00F0A29D /* PokemonViewCell.swift */,
 				0B77DB6F26660A0200F0A29D /* PokemonDetailView.swift */,
 				0B77DBE9266934EE00F0A29D /* MasterBallLoaderView.swift */,
+				0B77DC012669744600F0A29D /* PokemonVoteView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -178,6 +192,7 @@
 				0B77DB462665BC2C00F0A29D /* PokemonListViewModel.swift */,
 				0B77DBBE2666F86D00F0A29D /* PokemonViewModel.swift */,
 				0B77DBCE26674AED00F0A29D /* PokemonDetailViewModel.swift */,
+				0B77DC0926698D8F00F0A29D /* PokemonVoteViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -188,6 +203,7 @@
 				0B77DB4B2665BEC800F0A29D /* PokemonListModel.swift */,
 				0B77DBB92666E8C700F0A29D /* PokemonModel.swift */,
 				0B77DBC926674ACE00F0A29D /* PokemonDetailModel.swift */,
+				0B77DC0E2669998F00F0A29D /* PokemonVoteModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -198,6 +214,16 @@
 				0B77DB6A2665F75900F0A29D /* WebService.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		0B77DBEE26693E1D00F0A29D /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				0B77DBEF26693E4400F0A29D /* PokemonInfoView.swift */,
+				0B77DBF72669496400F0A29D /* StateButton.swift */,
+				0B77DBFC26695D6100F0A29D /* PokemonInfoDetailView.swift */,
+			);
+			path = Custom;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -336,17 +362,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B77DB062665A90C00F0A29D /* ContentView.swift in Sources */,
+				0B77DC0F2669998F00F0A29D /* PokemonVoteModel.swift in Sources */,
 				0B77DB042665A90C00F0A29D /* PokedexApp.swift in Sources */,
 				0B77DBEA266934EF00F0A29D /* MasterBallLoaderView.swift in Sources */,
+				0B77DBFD26695D6100F0A29D /* PokemonInfoDetailView.swift in Sources */,
 				0B77DB7026660A0200F0A29D /* PokemonDetailView.swift in Sources */,
 				0B77DBBA2666E8C700F0A29D /* PokemonModel.swift in Sources */,
+				0B77DC022669744700F0A29D /* PokemonVoteView.swift in Sources */,
 				0B77DB6B2665F75900F0A29D /* WebService.swift in Sources */,
 				0B77DB472665BC2C00F0A29D /* PokemonListViewModel.swift in Sources */,
 				0B77DB622665DF7B00F0A29D /* PokemonViewCell.swift in Sources */,
 				0B77DBBF2666F86D00F0A29D /* PokemonViewModel.swift in Sources */,
+				0B77DBF82669496500F0A29D /* StateButton.swift in Sources */,
+				0B77DBF026693E4500F0A29D /* PokemonInfoView.swift in Sources */,
 				0B77DBCA26674ACF00F0A29D /* PokemonDetailModel.swift in Sources */,
 				0B77DB4C2665BEC800F0A29D /* PokemonListModel.swift in Sources */,
 				0B77DBCF26674AED00F0A29D /* PokemonDetailViewModel.swift in Sources */,
+				0B77DC0A26698D8F00F0A29D /* PokemonVoteViewModel.swift in Sources */,
 				0B77DB5D2665C54C00F0A29D /* PokemonListView.swift in Sources */,
 				0B77DB3F2665B9C100F0A29D /* Constants.swift in Sources */,
 			);
