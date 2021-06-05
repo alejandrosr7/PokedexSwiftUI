@@ -13,21 +13,24 @@ struct PokemonListView: View {
     var body: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
-            if pokemonListViewModel.pokemonResults.count > 40 {
+            if pokemonListViewModel.pokemonResults.count > 10 {
                 NavigationView {
-                    ScrollView {
+                    List {
                         ForEach(pokemonListViewModel.pokemonResults, id: \.self) { pokemon in
                             NavigationLink(destination: PokemonDetailView(name: pokemon.name)) {
                                 PokemonViewCell(name: pokemon.name)
                             }
                         }
-                    }
+
+                        if pokemonListViewModel.pokemonResults.count < pokemonListViewModel.count {
+                            MasterBallLoaderView()
+                                .onAppear {
+                                    pokemonListViewModel.fetchPokemonList(urlString: pokemonListViewModel.nextSearch)
+                                }
+                        }
+                        
+                    }.listRowBackground(Color.black)
                     .navigationTitle("Pokedex")
-                    .navigationBarItems(leading: Button("Previous"){
-                        pokemonListViewModel.fetchPokemonList(urlString: pokemonListViewModel.previousSearch)
-                    }, trailing: Button("Next"){
-                        pokemonListViewModel.fetchPokemonList(urlString: pokemonListViewModel.nextSearch)
-                    })
                 }
             } else {
                 MasterBallLoaderView()

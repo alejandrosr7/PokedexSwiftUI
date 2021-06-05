@@ -10,7 +10,7 @@ import Foundation
 class PokemonListViewModel: ObservableObject {
     @Published var pokemonResults = [PokemonListResult]()
     @Published var nextSearch = ""
-    @Published var previousSearch = ""
+    @Published var count = 0
 
     init() {
         fetchPokemonList(urlString: Constants.pokemonListbaseURL)
@@ -20,7 +20,7 @@ class PokemonListViewModel: ObservableObject {
         WebService().fetchPokemonList(urlString) { (decoder) in
             self.pokemonResults = decoder.results
             self.nextSearch = decoder.next
-            self.previousSearch = decoder.previous ?? ""
+            self.count = decoder.count
         }
     }
 }
