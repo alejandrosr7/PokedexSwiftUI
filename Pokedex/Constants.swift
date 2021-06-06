@@ -39,9 +39,9 @@ struct Constants {
         case "ghost":
             return .systemIndigo
         case "psychic":
-            return .systemGreen
+            return .init(red: 246/255, green: 110/255, blue: 111/255, alpha: 1)
         case "dark":
-            return .black
+            return .init(red: 71/255, green: 68/255, blue: 78/255, alpha: 1)
         case "rock":
             return .init(red: 195/255, green: 180/255, blue: 123/255, alpha: 1)
         case "flying":

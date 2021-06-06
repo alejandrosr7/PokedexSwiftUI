@@ -25,7 +25,7 @@ class PokemonVoteViewModel: ObservableObject {
     }
 
     private func createThePokemonCardArray() {
-        for _ in 1...3 {
+        for _ in 1...20 {
             fetchPokemonVote()
         }
     }

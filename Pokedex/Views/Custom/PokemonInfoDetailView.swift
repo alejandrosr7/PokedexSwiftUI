@@ -19,21 +19,18 @@ struct PokemonInfoDetailView: View {
             }
             Divider()
                 .frame(height: 50)
-            VStack {
-                Text(pokemonDetailViewModel.name.capitalized)
-                    .font(.title)
-                HStack {
-                    ForEach(pokemonDetailViewModel.types, id: \.self) { pokemon in
-                        Text(pokemon.type.name.uppercased())
-                            .font(.headline)
-                            .foregroundColor(.black)
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 10)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .fill(Color(Constants.backgroundColor(forType: pokemon.type.name))
-                                            .opacity(0.25)))
-                    }
+            
+            HStack {
+                ForEach(pokemonDetailViewModel.types, id: \.self) { pokemon in
+                    Text(pokemon.type.name.uppercased())
+                        .font(.headline)
+                        .foregroundColor(.black)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 10)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(Color(Constants.backgroundColor(forType: pokemon.type.name))
+                                        .opacity(0.25)))
                 }
             }
             Divider()

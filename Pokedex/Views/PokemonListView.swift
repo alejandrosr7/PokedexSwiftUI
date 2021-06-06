@@ -10,27 +10,34 @@ import SwiftUI
 struct PokemonListView: View {
     
     @StateObject var pokemonListViewModel = PokemonListViewModel()
+    @State var isPreviousViewHidden = false
     var body: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
             if pokemonListViewModel.pokemonResults.count > 10 {
                 NavigationView {
-                    List {
+                    ScrollView {
                         ForEach(pokemonListViewModel.pokemonResults, id: \.self) { pokemon in
                             NavigationLink(destination: PokemonDetailView(name: pokemon.name)) {
                                 PokemonViewCell(name: pokemon.name)
                             }
                         }
-
-                        if pokemonListViewModel.pokemonResults.count < pokemonListViewModel.count {
-                            MasterBallLoaderView()
-                                .onAppear {
-                                    pokemonListViewModel.fetchPokemonList(urlString: pokemonListViewModel.nextSearch)
-                                }
-                        }
-                        
                     }.listRowBackground(Color.black)
                     .navigationTitle("Pokedex")
+                    .navigationBarItems(leading:
+                        Button(action: {
+                            pokemonListViewModel.fetchPokemonList(urlString: pokemonListViewModel.previous)
+                            
+                        }, label: {
+                            Image(systemName: "arrowshape.turn.up.backward")
+                        })
+                    , trailing:
+                        Button(action: {
+                            pokemonListViewModel.fetchPokemonList(urlString: pokemonListViewModel.nextSearch)
+                        }, label: {
+                            Image(systemName: "arrowshape.turn.up.forward")
+                        })
+                    )
                 }
             } else {
                 MasterBallLoaderView()

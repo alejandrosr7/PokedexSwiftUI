@@ -9,6 +9,7 @@ import Foundation
 
 class PokemonListViewModel: ObservableObject {
     @Published var pokemonResults = [PokemonListResult]()
+    @Published var previous = ""
     @Published var nextSearch = ""
     @Published var count = 0
 
@@ -19,6 +20,7 @@ class PokemonListViewModel: ObservableObject {
     func fetchPokemonList(urlString: String) {
         WebService().fetchPokemonList(urlString) { (decoder) in
             self.pokemonResults = decoder.results
+            self.previous = decoder.previous ?? ""
             self.nextSearch = decoder.next
             self.count = decoder.count
         }
