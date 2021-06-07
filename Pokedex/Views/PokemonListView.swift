@@ -29,13 +29,19 @@ struct PokemonListView: View {
                             pokemonListViewModel.fetchPokemonList(urlString: pokemonListViewModel.previous)
                             
                         }, label: {
-                            Image(systemName: "arrowshape.turn.up.backward")
+                            HStack {
+                                Image(systemName: "arrowshape.turn.up.backward")
+                                Text("Previous")
+                            }
                         })
                     , trailing:
                         Button(action: {
                             pokemonListViewModel.fetchPokemonList(urlString: pokemonListViewModel.nextSearch)
                         }, label: {
-                            Image(systemName: "arrowshape.turn.up.forward")
+                            HStack {
+                                Text("Next")
+                                Image(systemName: "arrowshape.turn.up.forward")
+                            }
                         })
                     )
                 }

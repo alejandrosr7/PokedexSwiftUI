@@ -21,7 +21,7 @@ class PokemonListViewModel: ObservableObject {
         WebService().fetchPokemonList(urlString) { (decoder) in
             self.pokemonResults = decoder.results
             self.previous = decoder.previous ?? ""
-            self.nextSearch = decoder.next
+            self.nextSearch = decoder.next ?? ""
             self.count = decoder.count
         }
     }

@@ -29,7 +29,7 @@ struct Constants {
         case "electric":
             return .yellow
         case "ground":
-            return .brown
+            return #colorLiteral(red: 0.8579149246, green: 0.477452755, blue: 0.2905587256, alpha: 1)
         case "fairy":
             return .init(red: 234/255, green: 128/255, blue: 224/255, alpha: 1)
         case "fighting":
