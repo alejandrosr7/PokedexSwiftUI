@@ -12,6 +12,8 @@ struct PokemonVoteView: View {
 
     @ObservedObject var pokemonVoteViewModel = PokemonVoteViewModel()
     @StateObject var pokemonVotedCoreDataViewModel = PokemonVotedCoreDataViewModel()
+    @State private var tutorialWasShown = !UserDefaults.standard.bool(forKey: "TutorialWasShown")
+    
     var x: CGFloat = 0.0
     var y: CGFloat = 0.0
     var degree: Double = 0.0
@@ -21,34 +23,52 @@ struct PokemonVoteView: View {
             Color.black.edgesIgnoringSafeArea(.all)
             VStack {
                 ZStack {
+                    Text("You don't have more votes for today")
+                        .font(.title)
+                        .foregroundColor(.white)
                     ForEach(pokemonVoteViewModel.pokemonCards) { pokemon in
                         pokemonCard(pokemon: pokemon, pokemonVotedCoreDataViewModel: pokemonVotedCoreDataViewModel)
                             .padding(8)
                     }
                 }
                 HStack(spacing: 10) {
-                    Button(action: {
-                        
-                    }, label: {
-                        HStack {
-                            Image("dislike")
-                                .resizable()
-                                .frame(width: 100, height: 100, alignment: .center)
-                                .padding([.leading, .bottom], 40)
-                        }
-                    })
+                    Image("dislike")
+                        .resizable()
+                        .frame(width: 100, height: 100, alignment: .center)
+                        .padding([.leading, .bottom], 40)
                     Spacer()
-                    Button(action: {
-                        
-                    }, label: {
-                        Image("like")
-                            .resizable()
-                            .frame(width: 100, height: 100, alignment: .leading)
-                            .padding([.trailing, .bottom], 40)
-                    })
-                    
+                    Image("like")
+                        .resizable()
+                        .frame(width: 100, height: 100, alignment: .leading)
+                        .padding([.trailing, .bottom], 40)
                 }
             }
+            .sheet(isPresented: $tutorialWasShown, content: {
+                VStack {
+                    HStack {
+                        Text("Drag the image to the left if you want to release (Dislike) the Pokemon.")
+                            .font(.caption)
+                        
+                        Image("dislike")
+                            .resizable()
+                            .frame(width: 100, height: 100, alignment: .center)
+                            .padding([.leading, .bottom], 40)
+                    }
+
+                    HStack {
+                        Text("Drag the image to the right if you want to catch (Like) the Pokemon.")
+                            .font(.caption)
+                        
+                        Image("like")
+                            .resizable()
+                            .frame(width: 100, height: 100, alignment: .center)
+                            .padding([.leading, .bottom], 40)
+                    }
+                }
+                .onDisappear {
+                    UserDefaults.standard.setValue(true, forKey: "TutorialWasShown")
+                }
+            }).foregroundColor(.black)
         }
     }
 }
@@ -62,7 +82,7 @@ struct VotePokemonView_Previews: PreviewProvider {
 struct pokemonCard: View {
     var pokemon: PokemonVoteModel
     @StateObject var pokemonVotedCoreDataViewModel: PokemonVotedCoreDataViewModel
-    @State var vote = 0
+    @State var vote = ""
     @State var x: CGFloat = 0.0
     @State var y: CGFloat = 0.0
     @State var degrees: Double = 0.0
@@ -114,16 +134,16 @@ struct pokemonCard: View {
                             x = 0; y = 0; degrees = 0
                         case let x where x > 100:
                             self.x = 500; degrees = 12
-                            vote = vote + 1
+                            vote = "Like"
                         case (-100)...(-1):
                             x = 0; y = 0; degrees = 0
                         case let x where x < -100:
                             self.x = -500; degrees = -12
-                            vote = vote - 1
+                            vote = "Dislike"
                         default:
                             x = 0; y = 0
                         }
-                        let pokemonVote = PokemonVotedModel(id: pokemon.id, name: pokemon.name, votes: vote)
+                        let pokemonVote = PokemonVotedModel(id: pokemon.id, name: pokemon.name.capitalized, votes: vote)
                         pokemonVotedCoreDataViewModel.addPokemonVote(pokemon: pokemonVote)
                     }
                 })

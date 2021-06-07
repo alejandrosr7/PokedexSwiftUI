@@ -14,6 +14,7 @@ struct PokemonViewCell: View {
     @StateObject var pokemonViewModel = PokemonViewModel()
     var body: some View {
         HStack {
+            Spacer()
             WebImage(url: URL(string: pokemonViewModel.sprites))
                 .resizable()
                 .scaledToFit()

@@ -16,11 +16,17 @@ struct PokemonVotedView: View {
                 ForEach(pokemonVotedViewModel.savedPokemonVotedEntities) { pokemon in
                     HStack {
                         Text(pokemon.pokedexNumber ?? "No Number")
-                        Text(pokemon.name ?? "No name")
-                        Text(pokemon.votes ?? "No name")
+                            .font(.subheadline)
+                        Divider()
+                        Text(pokemon.name?.capitalized ?? "No Name")
+                            .font(.title)
+                        Spacer()
+                        Text(pokemon.votes ?? "No Vote")
+                            .font(.title)
                     }
                 }
             }
+            .navigationTitle("Pokemon Voted")
             .onAppear {
                 pokemonVotedViewModel.fetchPokemonVotedList()
             }

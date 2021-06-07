@@ -18,13 +18,18 @@ struct PokemonDetailView: View {
             PokemonImageView(pokemonDetailViewModel: pokemonDetailViewModel)
             PokemonInfoDetailView(pokemonDetailViewModel: pokemonDetailViewModel)
             HStack {
-                ForEach(pokemonDetailViewModel.versionImages.removingDuplicates().suffix(3), id: \.self) { image in
-                    if image != "" {
-                        WebImage(url: URL(string: image))
-                            .resizable()
-                            .frame(width: 70, height: 70)
+                VStack(alignment: .center) {
+                    Text("Versions on video games")
+                        .font(.subheadline)
+                    HStack {
+                        ForEach(pokemonDetailViewModel.versionImages.removingDuplicates().suffix(3), id: \.self) { image in
+                            if image != "" {
+                                WebImage(url: URL(string: image))
+                                    .resizable()
+                                    .frame(width: 70, height: 70)
+                            }
+                        }
                     }
-
                 }
             }
             Divider()

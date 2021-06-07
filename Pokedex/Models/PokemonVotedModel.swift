@@ -10,5 +10,5 @@ import Foundation
 struct PokemonVotedModel {
     var id: Int
     var name: String
-    var votes: Int
+    var votes: String
 }

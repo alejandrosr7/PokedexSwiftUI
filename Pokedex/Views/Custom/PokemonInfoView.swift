@@ -21,7 +21,6 @@ struct PokemonInfoView: View {
                                 .replacingOccurrences(of: "-", with: " "))
                     }
                 }
-                
             } else {
                 ForEach(pokemonInfo.abilities, id: \.self) { pokemon in
                     Text(pokemon.ability.name
