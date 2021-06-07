@@ -18,6 +18,10 @@ struct ContentView: View {
                 .tabItem {
                     Label("Vote", systemImage: "flame.fill")
                 }
+            PokemonVotedView()
+                .tabItem {
+                    Label("Voted Pokemon", systemImage: "star")
+                }
         }
     }
 }

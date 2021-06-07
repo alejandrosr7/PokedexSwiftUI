@@ -16,7 +16,8 @@ class PokemonVoteViewModel: ObservableObject {
     }
 
     func fetchPokemonVote() {
-        WebService().fetchPokemonVoteDetail(Constants.pokemonURL + String(Int.random(in: 1..<1118))) { (pokemon) in
+        let pokedexPokemonNumber = String(Int.random(in: 1..<1118))
+        WebService().fetchPokemonVoteDetail(Constants.pokemonURL + pokedexPokemonNumber) { (pokemon) in
             if let pokemon = pokemon {
                 let pokemonEntity = PokemonVoteModel(id: pokemon.id, name: pokemon.name, types: pokemon.types, sprites: pokemon.sprites)
                 self.pokemonCards.append(pokemonEntity)

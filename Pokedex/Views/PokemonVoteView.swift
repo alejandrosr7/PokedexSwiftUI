@@ -11,6 +11,7 @@ import SDWebImageSwiftUI
 struct PokemonVoteView: View {
 
     @ObservedObject var pokemonVoteViewModel = PokemonVoteViewModel()
+    @StateObject var pokemonVotedCoreDataViewModel = PokemonVotedCoreDataViewModel()
     var x: CGFloat = 0.0
     var y: CGFloat = 0.0
     var degree: Double = 0.0
@@ -20,8 +21,8 @@ struct PokemonVoteView: View {
             Color.black.edgesIgnoringSafeArea(.all)
             VStack {
                 ZStack {
-                    ForEach(pokemonVoteViewModel.pokemonCards) { item in
-                        pokemonCard(pokemon: item)
+                    ForEach(pokemonVoteViewModel.pokemonCards) { pokemon in
+                        pokemonCard(pokemon: pokemon, pokemonVotedCoreDataViewModel: pokemonVotedCoreDataViewModel)
                             .padding(8)
                     }
                 }
@@ -60,6 +61,8 @@ struct VotePokemonView_Previews: PreviewProvider {
 
 struct pokemonCard: View {
     var pokemon: PokemonVoteModel
+    @StateObject var pokemonVotedCoreDataViewModel: PokemonVotedCoreDataViewModel
+    @State var vote = 0
     @State var x: CGFloat = 0.0
     @State var y: CGFloat = 0.0
     @State var degrees: Double = 0.0
@@ -111,15 +114,19 @@ struct pokemonCard: View {
                             x = 0; y = 0; degrees = 0
                         case let x where x > 100:
                             self.x = 500; degrees = 12
+                            vote = vote + 1
                         case (-100)...(-1):
                             x = 0; y = 0; degrees = 0
                         case let x where x < -100:
                             self.x = -500; degrees = -12
+                            vote = vote - 1
                         default:
                             x = 0; y = 0
                         }
+                        let pokemonVote = PokemonVotedModel(id: pokemon.id, name: pokemon.name, votes: vote)
+                        pokemonVotedCoreDataViewModel.addPokemonVote(pokemon: pokemonVote)
                     }
-                }
-        )
+                })
+        .environmentObject(pokemonVotedCoreDataViewModel)
     }
 }

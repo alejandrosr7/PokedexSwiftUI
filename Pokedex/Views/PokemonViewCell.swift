@@ -28,21 +28,11 @@ struct PokemonViewCell: View {
                         .fill(Color.white.opacity(0.25))
                 )
             Spacer()
-            VStack {
-                ForEach(pokemonViewModel.types, id: \.self) { pokemonType in
-                    Circle()
-                        .fill(Color(Constants.backgroundColor(forType: pokemonType.type.name)))
-                        .frame(width: 30, height: 30)
-                        .shadow(color: .gray, radius: 6, x: 0.0, y: 0.0)
-                }
-            }
-            .padding(.trailing, 10)
         }
         .progressViewStyle(CircularProgressViewStyle())
         .onAppear {
             pokemonViewModel.fetchPokemon(with: name)
         }
-//        .background(Color(Constants.backgroundColor(forType: pokemonViewModel.types.first?.type.name ?? "none")))
         .background(LinearGradient(gradient: Gradient(colors: colorCell(types: pokemonViewModel.types)), startPoint: /*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/, endPoint: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/))
         .cornerRadius(12)
         .shadow(color: .gray, radius: 6, x: 0.0, y: 0.0)
