@@ -44,27 +44,27 @@ struct PokemonVoteView: View {
                 }
             }
             .sheet(isPresented: $tutorialWasShown, content: {
-                VStack {
+                VStack(alignment: .center) {
+                    Text("Tutorial")
+                        .font(.title)
                     HStack {
-                        Text("Drag the image to the left if you want to release (Dislike) the Pokemon.")
-                            .font(.caption)
-                        
                         Image("dislike")
                             .resizable()
                             .frame(width: 100, height: 100, alignment: .center)
-                            .padding([.leading, .bottom], 40)
+                        Text("Drag the image to the left if you want to release (Dislike) the Pokemon.")
+                            .font(.caption)
                     }
 
                     HStack {
                         Text("Drag the image to the right if you want to catch (Like) the Pokemon.")
                             .font(.caption)
-                        
                         Image("like")
                             .resizable()
                             .frame(width: 100, height: 100, alignment: .center)
-                            .padding([.leading, .bottom], 40)
                     }
+                    
                 }
+                .padding()
                 .onDisappear {
                     UserDefaults.standard.setValue(true, forKey: "TutorialWasShown")
                 }

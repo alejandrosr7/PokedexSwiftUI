@@ -19,10 +19,10 @@ struct PokemonVotedView: View {
                             .font(.subheadline)
                         Divider()
                         Text(pokemon.name?.capitalized ?? "No Name")
-                            .font(.title)
+                            .font(.subheadline)
                         Spacer()
                         Text(pokemon.votes ?? "No Vote")
-                            .font(.title)
+                            .font(.subheadline)
                     }
                 }
             }
